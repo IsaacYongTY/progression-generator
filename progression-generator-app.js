@@ -491,6 +491,12 @@ document.querySelector('#copy').addEventListener('click', function (e) {
    
 })
 
+document.addEventListener('keydown', function (e) {
+   console.log(e)
+   if (e.code === 'v') {
+      console.log('lol')
+   }
+})
 
 
 
