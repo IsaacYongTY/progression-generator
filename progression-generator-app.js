@@ -5,7 +5,7 @@
          
 // Initialization
 const key = {}
-let chords = {}
+let chords = []
 isHalfBar = false
 
 let standardFullBarSpace = 18
@@ -22,55 +22,47 @@ document.querySelector('#prog-choice-2').addEventListener('click', function(e) {
 })
 
 document.querySelector('#prog-common-progression').addEventListener('change', function (e) {
-   document.getElementById('prog-text').value = e.target.value
+   document.querySelector('#prog-text').value = e.target.value
+})
+
+document.querySelector('#prog-text').addEventListener('input', function (e) {
+   document.querySelector('#prog-common-progression').value = ''
 })
 
 document.querySelector('#prog-form').addEventListener('submit', function (e) {
    
    e.preventDefault()
-   // Debugging
-
-       //console.log(e.target.elements.inputSection.value)
-      // console.log(e.target.elements.inputKey.value)
-      // console.log(e.target.elements.inputProgression.value)
 
    let result = ''
 
    keyLibrary (e.target.elements.inputKey.value)
-   progressionNumOnly = removeSuffix(e.target.elements.inputProgression.value)
-   chords = assignChordsToProg(progressionNumOnly)
-
+   
    if (isHalfBar === false) {
       result = fullBarProg(e.target.elements.inputSection.value, 
-                                       progressionNumOnly, 
+                                       assignChordsToProg(e.target.elements.inputProgression.value),
                                        e.target.elements.inputSpacing.value,
-                                       chords
+                                       removeSuffix(e.target.elements.inputProgression.value)
    )}  else {
       result = halfBarProg(e.target.elements.inputSection.value, 
-                                       progressionNumOnly, 
+                                       assignChordsToProg(e.target.elements.inputProgression.value),
                                        e.target.elements.inputSpacing.value,
-                                       chords
+                                       removeSuffix(e.target.elements.inputProgression.value)
    )}
    
-   document.getElementById('outputResult').value += result
-   document.getElementById('prog-section').value = ''
+   document.querySelector('#output-result').value += result
+   document.querySelector('#prog-section').value = ''
 })
 
 
 document.querySelector('#clear').addEventListener('click', function (e) {
-   document.getElementById('outputResult').value = ''
+   document.querySelector('#output-result').value = ''
 })
 
 document.querySelector('#copy').addEventListener('click', function (e) {
-   document.execCommand('copy') = document.getElementById('outputResult').value 
+   document.querySelector('#output-result').select()
+   document.execCommand('copy')
+   document.querySelector('#output-result').blur()
 })
 
 
-
-
-
-
-
-// Test Area
-  //console.log(progressionGenerator('Verse 1','Db','4236112'))
 

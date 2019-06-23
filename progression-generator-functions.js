@@ -274,6 +274,7 @@ const renderSpacing = function(spacing, chordLength) {
  
  const assignChordsToProg = function (getProgression) {
     // Assign actual chords to progression
+  
     for (index=0; index !==  getProgression.length; index++) {
        
         if  (getProgression[index] == '1') {
@@ -335,12 +336,11 @@ const renderSpacing = function(spacing, chordLength) {
      
               chords[index] =  key.b6
             }
-          
         }
     return chords
  }
 
- const fullBarProg = function (getSection,progressionNumOnly, getSpace, chords) {
+ const fullBarProg = function (getSection,chords, getSpace, progressionNumOnly) {
     let resultString = ''
  
     if (getSection !== '') {
@@ -372,7 +372,7 @@ const renderSpacing = function(spacing, chordLength) {
     return resultString
  }
 
- const halfBarProg = function (getSection,progressionNumOnly, getSpace, chords) {
+ const halfBarProg = function (getSection,chords, getSpace, progressionNumOnly) {
     halfSpace = Math.ceil((getSpace/2))
     let resultString = ''
 
@@ -421,3 +421,4 @@ const renderSpacing = function(spacing, chordLength) {
     chords = {}
     return resultString
  }
+
